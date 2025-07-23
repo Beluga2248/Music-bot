@@ -9,7 +9,7 @@ module.exports = {
     options: [
         {
             name: 'song',
-            description:('<a:Playing_Audio:1011614261560221726:> The song you want to play'),
+            description:('The song you want to play'),
             type: ApplicationCommandOptionType.String,
             required: true,
         }
@@ -45,11 +45,11 @@ module.exports = {
                 }
             });
 
-            defaultEmbed.setAuthor({ name: await Translate(`<a:Spotify:1117769817412354198:> Loading <${track.title}> to the queue... <✅>`) });
+            defaultEmbed.setAuthor({ name: await Translate(`<a:Spotify:1117769817412354198:> Loading <${track.title}> to the queue...`) });
             await inter.editReply({ embeds: [defaultEmbed] });
         } catch (error) {
             console.log(`Play error: ${error}`);
-            defaultEmbed.setAuthor({ name: await Translate(`<a:Wrong:1017416697168269372:> I can't join the voice channel... try again ? <❌>`) });
+            defaultEmbed.setAuthor({ name: await Translate(`<a:Wrong:1017416697168269372:> I can't join the voice channel... try again ?`) });
             return inter.editReply({ embeds: [defaultEmbed] });
         }
     }
