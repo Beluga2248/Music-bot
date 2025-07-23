@@ -39,10 +39,10 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor('#2f3136')
-            .setAuthor({ name: await Translate(`Results for <${song}>`), iconURL: client.user.displayAvatarURL({ size: 1024, dynamic: true }) })
+            .setAuthor({ name: await Translate(`<a:Spotify:1117769817412354198:> Results for <${song}>`), iconURL: client.user.displayAvatarURL({ size: 1024, dynamic: true }) })
             .setDescription(await Translate(`<${maxTracks.map((track, i) => `**${i + 1}**. ${track.title} | ${track.author}`).join('\n')}\n\n> Select choice between <**1**> and <**${maxTracks.length}**> or <**cancel** ⬇️>`))
             .setTimestamp()
-            .setFooter({ text: await Translate('Music comes first - Made with heart by the Community <❤️>'), iconURL: inter.member.avatarURL({ dynamic: true }) })
+            .setFooter({ text: await Translate('Music comes first - Made with Beluga2248'), iconURL: inter.member.avatarURL({ dynamic: true }) })
 
         inter.editReply({ embeds: [embed] });
 
@@ -56,19 +56,19 @@ module.exports = {
         collector.on('collect', async (query) => {
             collector.stop();
             if (query.content.toLowerCase() === 'cancel') {
-                return inter.followUp({ content: await Translate(`Search cancelled <✅>`), ephemeral: true });
+                return inter.followUp({ content: await Translate(`Search cancelled <a:Yes:1011614293420150805:>`), ephemeral: true });
             }
 
             const value = parseInt(query);
             if (!value || value <= 0 || value > maxTracks.length) {
-                return inter.followUp({ content: await Translate(`Invalid response, try a value between <**1**> and <**${maxTracks.length}**> or <**cancel**>... try again ? <❌>`), ephemeral: true });
+                return inter.followUp({ content: await Translate(`Invalid response, try a value between <**1**> and <**${maxTracks.length}**> or <**cancel**>... try again ? <a:Wrong:1017416697168269372:>`), ephemeral: true });
             }
 
             try {
                 if (!queue.connection) await queue.connect(inter.member.voice.channel);
             } catch {
                 await player.deleteQueue(inter.guildId);
-                return inter.followUp({ content: await Translate(`I can't join the voice channel <${inter.member}>... try again ? <❌>`), ephemeral: true });
+                return inter.followUp({ content: await Translate(`I can't join the voice channel <${inter.member}>... try again ? <a:Wrong:1017416697168269372:>`), ephemeral: true });
             }
 
             await inter.followUp({content: await Translate(`Loading your search... <🎧>`), ephemeral: true });
@@ -79,7 +79,7 @@ module.exports = {
         });
 
         collector.on('end', async (msg, reason) => {
-            if (reason === 'time') return inter.followUp({ content: await Translate(`Search timed out <${inter.member}>... try again ? <❌>`), ephemeral: true });
+            if (reason === 'time') return inter.followUp({ content: await Translate(`Search timed out <${inter.member}>... try again ? <a:Wrong:1017416697168269372:>`), ephemeral: true });
         });
     }
 }
